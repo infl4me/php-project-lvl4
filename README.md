@@ -1,4 +1,4 @@
-[Demo](https://blooming-dawn-07467.herokuapp.com/)
+[Demo](https://shrouded-sierra-87295.herokuapp.com/)
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/infl4me/php-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/infl4me/php-project-lvl4/actions)
