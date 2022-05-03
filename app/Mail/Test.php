@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class Test extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
@@ -17,7 +18,6 @@ class Test extends Mailable
      */
     public function __construct()
     {
-        //
     }
 
     /**
