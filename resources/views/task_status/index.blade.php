@@ -4,7 +4,7 @@
     <div class="container-lg">
         <div class="row">
             <div class="col">
-                <h1 class="h1 mb-5">{{ __('views.statuses') }}</h1>
+                <h1 class="h1 mb-4">{{ __('views.statuses') }}</h1>
                 <a href="{{ route('task_statuses.create') }}" class="btn btn-primary">
                     {{ __('views.create_status') }}</a>
                 <div class="table-responsive mt-2">
