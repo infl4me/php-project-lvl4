@@ -120,6 +120,7 @@ return [
             'handler' => \Rollbar\Laravel\MonologHandler::class,
             'access_token' => env('ROLLBAR_TOKEN'),
             'level' => 'debug',
+            'enabled' => !env('ROLLBAR_DISABLED'),
         ],
     ],
 
