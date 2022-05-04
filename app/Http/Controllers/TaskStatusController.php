@@ -46,6 +46,8 @@ class TaskStatusController extends Controller
         $taskStatus = new TaskStatus($request->all());
         $taskStatus->save();
 
+        flash('alerts.status.created')->success();
+
         return redirect()->route('task_statuses.show', $taskStatus);
     }
 
@@ -87,7 +89,7 @@ class TaskStatusController extends Controller
         $taskStatus = TaskStatus::findOrFail($id);
         $taskStatus->update($request->all());
 
-        flash('Status has been updated')->success();
+        flash('alerts.status.updated')->success();
 
         return redirect()->route('task_statuses.show', $taskStatus);
     }
@@ -102,6 +104,8 @@ class TaskStatusController extends Controller
     {
         $taskStatus = TaskStatus::findOrFail($id);
         $taskStatus->delete();
+
+        flash('alerts.status.deleted')->success();
 
         return redirect()->route('task_statuses.index');
     }
