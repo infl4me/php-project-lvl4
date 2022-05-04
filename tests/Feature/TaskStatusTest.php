@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\TaskStatus;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\CreatesApplication;
@@ -19,6 +20,7 @@ class TaskStatusTest extends TestCase
     {
         parent::setUp();
         TaskStatus::factory()->count(2)->create();
+        User::factory()->create();
     }
 
     public function testIndex()
@@ -29,8 +31,9 @@ class TaskStatusTest extends TestCase
 
     public function testStore()
     {
+        $user = User::first();
         $data = TaskStatus::factory()->make()->only('name');
-        $response = $this->post(route('task_statuses.store'), ['name' => $data['name']]);
+        $response = $this->actingAs($user)->post(route('task_statuses.store'), ['name' => $data['name']]);
         $taskStatus = TaskStatus::latest('id')->first();
         $response->assertRedirect(route('task_statuses.show', $taskStatus));
         $response->assertSessionHasNoErrors();
@@ -53,10 +56,11 @@ class TaskStatusTest extends TestCase
 
     public function testUpdate()
     {
+        $user = User::first();
         $taskStatus = TaskStatus::first();
         $data = TaskStatus::factory()->make()->only('name');
 
-        $response = $this->patch(route('task_statuses.update', $taskStatus), ['name' => $data['name']]);
+        $response = $this->actingAs($user)->patch(route('task_statuses.update', $taskStatus), ['name' => $data['name']]);
 
         $response->assertRedirect(route('task_statuses.show', $taskStatus));
         $response->assertSessionHasNoErrors();
@@ -65,9 +69,10 @@ class TaskStatusTest extends TestCase
 
     public function testDestroy()
     {
+        $user = User::first();
         $taskStatus = TaskStatus::first();
 
-        $response = $this->delete(route('task_statuses.destroy', $taskStatus));
+        $response = $this->actingAs($user)->delete(route('task_statuses.destroy', $taskStatus));
 
         $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();

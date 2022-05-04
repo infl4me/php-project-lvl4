@@ -42,6 +42,9 @@ return [
     'created_at' => 'Created At',
     'actions' => 'Actions',
     'edit' => 'Edit',
+    'update' => 'Update',
     'delete' => 'Delete',
     'create' => 'Create',
+    'delete_status_confirm' => 'Are you sure you want to delete this status?',
+    'edit_status' => 'Edit Status',
 ];

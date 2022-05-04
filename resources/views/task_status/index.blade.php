@@ -24,7 +24,7 @@
                                     <td>
                                         <a class="text-danger text-decoration-none"
                                             href="{{ route('task_statuses.destroy', $taskStatus) }}"
-                                            data-confirm="{{ __('views.are_you_sure') }}" data-method="delete">
+                                            data-confirm="{{ __('views.delete_status_confirm') }}" data-method="delete">
                                             {{ __('views.delete') }}</a>
                                         <a class="text-decoration-none"
                                             href="{{ route('task_statuses.edit', $taskStatus) }}">

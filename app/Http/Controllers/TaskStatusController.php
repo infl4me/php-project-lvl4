@@ -39,14 +39,16 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', TaskStatus::class);
+
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:task_statuses',
         ]);
 
         $taskStatus = new TaskStatus($request->all());
         $taskStatus->save();
 
-        flash('alerts.status.created')->success();
+        flash(__('alerts.status.created'))->success();
 
         return redirect()->route('task_statuses.show', $taskStatus);
     }
@@ -87,9 +89,10 @@ class TaskStatusController extends Controller
     public function update(Request $request, $id)
     {
         $taskStatus = TaskStatus::findOrFail($id);
+        $this->authorize('update', [TaskStatus::class, $taskStatus]);
         $taskStatus->update($request->all());
 
-        flash('alerts.status.updated')->success();
+        flash(__('alerts.status.updated'))->success();
 
         return redirect()->route('task_statuses.show', $taskStatus);
     }
@@ -103,9 +106,10 @@ class TaskStatusController extends Controller
     public function destroy($id)
     {
         $taskStatus = TaskStatus::findOrFail($id);
+        $this->authorize('delete', [TaskStatus::class, $taskStatus]);
         $taskStatus->delete();
 
-        flash('alerts.status.deleted')->success();
+        flash(__('alerts.status.deleted'))->success();
 
         return redirect()->route('task_statuses.index');
     }
