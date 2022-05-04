@@ -17,7 +17,7 @@ class TaskStatusFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->randomElement(['new', 'in_progress', 'testing', 'complete']),
+            'name' => $this->faker->text(15),
         ];
     }
 }
