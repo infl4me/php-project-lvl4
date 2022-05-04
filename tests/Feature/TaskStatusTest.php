@@ -31,10 +31,45 @@ class TaskStatusTest extends TestCase
     {
         $data = TaskStatus::factory()->make()->only('name');
         $response = $this->post(route('task_statuses.store'), ['name' => $data['name']]);
-        $status = TaskStatus::latest('id')->first();
-        $response->assertRedirect(route('task_statuses.show', $status));
+        $taskStatus = TaskStatus::latest('id')->first();
+        $response->assertRedirect(route('task_statuses.show', $taskStatus));
         $response->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('task_statuses', $data);
+    }
+
+    public function testCreate()
+    {
+        $response = $this->get(route('task_statuses.create'));
+        $response->assertOk();
+    }
+
+    public function testEdit()
+    {
+        $taskStatus = TaskStatus::first();
+        $response = $this->get(route('task_statuses.edit', $taskStatus));
+        $response->assertOk();
+    }
+
+    public function testUpdate()
+    {
+        $taskStatus = TaskStatus::first();
+        $data = TaskStatus::factory()->make()->only('name');
+
+        $response = $this->patch(route('task_statuses.update', $taskStatus), ['name' => $data['name']]);
+
+        $response->assertRedirect(route('task_statuses.show', $taskStatus));
+        $response->assertSessionHasNoErrors();
+        $this->assertDatabaseHas('task_statuses', $data);
+    }
+
+    public function testDestroy()
+    {
+        $taskStatus = TaskStatus::first();
+
+        $response = $this->delete(route('task_statuses.destroy', $taskStatus));
+
+        $response->assertRedirect(route('task_statuses.index'));
+        $response->assertSessionHasNoErrors();
     }
 }

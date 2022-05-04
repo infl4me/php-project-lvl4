@@ -27,6 +27,7 @@ class TaskStatusController extends Controller
     public function create()
     {
         $taskStatus = new TaskStatus();
+
         return view('task_status.create', compact('taskStatus'));
     }
 
@@ -57,6 +58,7 @@ class TaskStatusController extends Controller
     public function show($id)
     {
         $taskStatus = TaskStatus::findOrFail($id);
+
         return view('task_status.show', compact('taskStatus'));
     }
 
@@ -69,6 +71,7 @@ class TaskStatusController extends Controller
     public function edit($id)
     {
         $taskStatus = TaskStatus::findOrFail($id);
+
         return view('task_status.edit', compact('taskStatus'));
     }
 
@@ -97,5 +100,9 @@ class TaskStatusController extends Controller
      */
     public function destroy($id)
     {
+        $taskStatus = TaskStatus::findOrFail($id);
+        $taskStatus->delete();
+
+        return redirect()->route('task_statuses.index');
     }
 }
