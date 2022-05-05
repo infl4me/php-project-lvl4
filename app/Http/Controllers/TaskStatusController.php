@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(TaskStatus::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -39,8 +44,6 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        $this->authorize('create', TaskStatus::class);
-
         $this->validate($request, [
             'name' => 'required|unique:task_statuses',
         ]);
@@ -59,10 +62,8 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(TaskStatus $taskStatus)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
-
         return view('task_status.show', compact('taskStatus'));
     }
 
@@ -72,10 +73,8 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(TaskStatus $taskStatus)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
-
         return view('task_status.edit', compact('taskStatus'));
     }
 
@@ -86,10 +85,8 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TaskStatus $taskStatus)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
-        $this->authorize('update', [TaskStatus::class, $taskStatus]);
         $taskStatus->update($request->all());
 
         flash(__('alerts.status.updated'))->success();
@@ -103,10 +100,8 @@ class TaskStatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(TaskStatus $taskStatus)
     {
-        $taskStatus = TaskStatus::findOrFail($id);
-        $this->authorize('delete', [TaskStatus::class, $taskStatus]);
         $taskStatus->delete();
 
         flash(__('alerts.status.deleted'))->success();
