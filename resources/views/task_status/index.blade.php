@@ -5,8 +5,12 @@
         <div class="row">
             <div class="col">
                 <h1 class="h1 mb-4">{{ __('views.statuses') }}</h1>
-                <a href="{{ route('task_statuses.create') }}" class="btn btn-primary">
-                    {{ __('views.create_status') }}</a>
+
+                @can('create', App\Models\TaskStatus::class)
+                    <a href="{{ route('task_statuses.create') }}" class="btn btn-primary">
+                        {{ __('views.create_status') }}</a>
+                @endcan
+
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered table-hover text-nowrap">
                         <tbody>
@@ -22,13 +26,17 @@
                                     <td>{{ $taskStatus->name }}</td>
                                     <td>{{ $taskStatus->created_at }}</td>
                                     <td>
-                                        <a class="text-danger text-decoration-none"
-                                            href="{{ route('task_statuses.destroy', $taskStatus) }}"
-                                            data-confirm="{{ __('views.delete_status_confirm') }}" data-method="delete">
-                                            {{ __('views.delete') }}</a>
-                                        <a class="text-decoration-none"
-                                            href="{{ route('task_statuses.edit', $taskStatus) }}">
-                                            {{ __('views.edit') }}</a>
+                                        @can('delete', $taskStatus)
+                                            <a class="text-danger text-decoration-none"
+                                                href="{{ route('task_statuses.destroy', $taskStatus) }}"
+                                                data-confirm="{{ __('views.delete_status_confirm') }}" data-method="delete">
+                                                {{ __('views.delete') }}</a>
+                                        @endcan
+                                        @can('update', $taskStatus)
+                                            <a class="text-decoration-none"
+                                                href="{{ route('task_statuses.edit', $taskStatus) }}">
+                                                {{ __('views.edit') }}</a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach
