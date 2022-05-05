@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\TaskStatus;
 use App\Models\User;
+use Database\Seeders\TaskStatusSeeder;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\CreatesApplication;
@@ -19,7 +20,7 @@ class TaskStatusTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        TaskStatus::factory()->count(2)->create();
+        $this->seed(TaskStatusSeeder::class);
         User::factory()->create();
     }
 
