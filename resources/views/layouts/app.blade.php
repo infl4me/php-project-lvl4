@@ -35,8 +35,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            {{-- <a class="nav-link {{ Route::is('tasks.index') ? 'active' : '' }}" href="{{route('tasks.index')}}">
-                                {{__('views.tasks')}}</a> --}}
+                            <a class="nav-link {{ Route::is('tasks.index') ? 'active' : '' }}"
+                                href="{{ route('tasks.index') }}">
+                                {{ __('views.tasks') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('task_statuses.index') ? 'active' : '' }}"
@@ -61,7 +62,8 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('views.register') }}</a>
+                                    <a class="nav-link"
+                                        href="{{ route('register') }}">{{ __('views.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -73,7 +75,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                             document.getElementById('logout-form').submit();">
                                         {{ __('views.logout') }}
                                     </a>
 

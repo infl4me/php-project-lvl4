@@ -4,26 +4,10 @@ namespace Tests\Feature;
 
 use App\Models\TaskStatus;
 use App\Models\User;
-use Database\Seeders\TaskStatusSeeder;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\CreatesApplication;
 use Tests\TestCase;
 
 class TaskStatusTest extends TestCase
 {
-    use DatabaseTransactions;
-    use DatabaseMigrations;
-
-    use CreatesApplication;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->seed(TaskStatusSeeder::class);
-        User::factory()->create();
-    }
-
     public function testIndex()
     {
         $response = $this->get(route('task_statuses.index'));
@@ -32,13 +16,11 @@ class TaskStatusTest extends TestCase
 
     public function testStore()
     {
-        $user = User::first();
         $data = TaskStatus::factory()->make()->only('name');
-        $response = $this->actingAs($user)->post(route('task_statuses.store'), ['name' => $data['name']]);
+        $response = $this->post(route('task_statuses.store'), $data);
         $taskStatus = TaskStatus::latest('id')->first();
         $response->assertRedirect(route('task_statuses.show', $taskStatus));
         $response->assertSessionHasNoErrors();
-
         $this->assertDatabaseHas('task_statuses', $data);
     }
 
@@ -63,7 +45,7 @@ class TaskStatusTest extends TestCase
 
         $response = $this->actingAs($user)->patch(route('task_statuses.update', $taskStatus), ['name' => $data['name']]);
 
-        $response->assertRedirect(route('task_statuses.show', $taskStatus));
+        $response->assertRedirect(route('task_statuses.edit', $taskStatus));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('task_statuses', $data);
     }
