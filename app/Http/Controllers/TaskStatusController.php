@@ -102,6 +102,12 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
+        if ($taskStatus->tasks()->count()) {
+            flash(__('alerts.status.cant_delete'))->error();
+
+            return redirect()->route('task_statuses.index');
+        }
+
         $taskStatus->delete();
 
         flash(__('alerts.status.deleted'))->success();
