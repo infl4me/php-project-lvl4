@@ -12,4 +12,9 @@ return [
         'created' => 'Task has been created',
         'deleted' => 'Task has been deleted',
     ],
+    'label' => [
+        'updated' => 'Label has been updated',
+        'created' => 'Label has been created',
+        'deleted' => 'Label has been deleted',
+    ],
 ];

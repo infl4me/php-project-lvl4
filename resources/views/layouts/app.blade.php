@@ -45,8 +45,8 @@
                                 {{ __('views.statuses') }}</a>
                         </li>
                         <li class="nav-item">
-                            {{-- <a class="nav-link {{ Route::is('labels.index') ? 'active' : '' }}" href="{{route('labels.index')}}">
-                                {{__('views.labels')}}</a> --}}
+                            <a class="nav-link {{ Route::is('labels.index') ? 'active' : '' }}" href="{{route('labels.index')}}">
+                                {{__('views.labels')}}</a>
                         </li>
                     </ul>
 

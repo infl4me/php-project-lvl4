@@ -14,7 +14,9 @@ class LabelController extends Controller
      */
     public function index()
     {
-        //
+        $labels = Label::all();
+
+        return view('label.index', compact('labels'));
     }
 
     /**
@@ -24,7 +26,9 @@ class LabelController extends Controller
      */
     public function create()
     {
-        //
+        $label = new Label();
+
+        return view('label.create', compact('label'));
     }
 
     /**
@@ -35,7 +39,16 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $label = new Label($request->all());
+        $label->save();
+
+        flash(__('alerts.label.created'))->success();
+
+        return redirect()->route('labels.show', $label);
     }
 
     /**
@@ -46,7 +59,7 @@ class LabelController extends Controller
      */
     public function show(Label $label)
     {
-        //
+        return view('label.show', compact('label'));
     }
 
     /**
@@ -57,7 +70,7 @@ class LabelController extends Controller
      */
     public function edit(Label $label)
     {
-        //
+        return view('label.edit', compact('label'));
     }
 
     /**
@@ -69,7 +82,11 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        //
+        $label->update($request->all());
+
+        flash(__('alerts.label.updated'))->success();
+
+        return redirect()->route('labels.edit', $label);
     }
 
     /**
@@ -80,6 +97,10 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        //
+        $label->delete();
+
+        flash(__('alerts.label.deleted'))->success();
+
+        return redirect()->route('labels.index');
     }
 }
