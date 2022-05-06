@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class LabelController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Label::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -97,6 +102,12 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
+        if ($label->tasks()->count()) {
+            flash(__('alerts.label.cant_delete'))->error();
+
+            return redirect()->route('labels.index');
+        }
+
         $label->delete();
 
         flash(__('alerts.label.deleted'))->success();
