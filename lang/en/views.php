@@ -25,6 +25,9 @@ return [
         'if_not_received_email' => 'If you did not receive the email',
         'resend_verification' => 'click here to request another',
     ],
+    'validation' => [
+        'status_unique' => 'Status with this name already exists'
+    ],
     'login' => 'Login',
     'register' => 'Register',
     'logout' => 'Logout',

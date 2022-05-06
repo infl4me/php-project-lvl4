@@ -25,6 +25,9 @@ return [
         'if_not_received_email' => 'Если вы не получили Email',
         'resend_verification' => 'нажмите здесь чтобы получить еще один',
     ],
+    'validation' => [
+        'status_unique' => 'Статус с таким именем уже существует'
+    ],
     'login' => 'Вход',
     'register' => 'Регистрация',
     'logout' => 'Выход',

@@ -46,7 +46,7 @@ class TaskStatusController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:task_statuses',
-        ]);
+        ], ['name.unique' => __('views.validation.status_unique')]);
 
         $taskStatus = new TaskStatus($request->all());
         $taskStatus->save();
