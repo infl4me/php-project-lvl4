@@ -64,9 +64,9 @@ class LabelTest extends TestCase
 
     public function testDestroy()
     {
-        $labelStatus = Label::first();
+        $label = Label::first();
 
-        $response = $this->delete(route('labels.destroy', $labelStatus));
+        $response = $this->delete(route('labels.destroy', $label));
 
         $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();

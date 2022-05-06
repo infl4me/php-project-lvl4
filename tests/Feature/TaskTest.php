@@ -67,9 +67,9 @@ class TaskTest extends TestCase
 
     public function testDestroy()
     {
-        $taskStatus = Task::first();
+        $task = Task::first();
 
-        $response = $this->delete(route('tasks.destroy', $taskStatus));
+        $response = $this->delete(route('tasks.destroy', $task));
 
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
