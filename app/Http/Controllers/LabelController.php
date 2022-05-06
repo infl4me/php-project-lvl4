@@ -45,8 +45,8 @@ class LabelController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-        ]);
+            'name' => 'required|unique:labels',
+        ], ['name.unique' => __('views.validation.label_unique')]);
 
         $label = new Label($request->all());
         $label->save();

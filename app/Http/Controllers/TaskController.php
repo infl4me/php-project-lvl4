@@ -69,9 +69,9 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:tasks',
             'status_id' => 'required',
-        ]);
+        ], ['name.unique' => __('views.validation.task_unique')]);
 
         $task = new Task($request->all());
         $task->created_by_id = Auth::id();

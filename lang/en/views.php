@@ -26,7 +26,9 @@ return [
         'resend_verification' => 'click here to request another',
     ],
     'validation' => [
-        'status_unique' => 'Status with this name already exists'
+        'status_unique' => 'Status with this name already exists',
+        'task_unique' => 'Task with this name already exists',
+        'label_unique' => 'Label with this name already exists',
     ],
     'login' => 'Login',
     'register' => 'Register',
