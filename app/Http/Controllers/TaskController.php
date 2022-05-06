@@ -40,7 +40,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('created_by_id'),
                 AllowedFilter::exact('assigned_to_id'),
             ])
-            ->get();
+            ->paginate(10);
 
         [$userOptions, $statusOptions] = $this->getTaskOptions();
         $filter = $request->query('filter');

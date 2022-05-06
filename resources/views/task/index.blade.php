@@ -60,6 +60,10 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div>
+                    {{ $tasks->links('task.pagination') }}
+                </div>
             </div>
         </div>
     </div>
