@@ -18,7 +18,6 @@ class TaskStatusTest extends TestCase
     {
         $data = TaskStatus::factory()->make()->only('name');
         $response = $this->post(route('task_statuses.store'), $data);
-        $taskStatus = TaskStatus::latest('id')->first();
         $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('task_statuses', $data);

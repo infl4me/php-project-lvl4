@@ -34,7 +34,6 @@ class TaskTest extends TestCase
     {
         $data = Task::factory()->make()->toArray();
         $response = $this->post(route('tasks.store'), $data);
-        $task = Task::latest('id')->first();
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('tasks', $data);

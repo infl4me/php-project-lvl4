@@ -31,7 +31,6 @@ class LabelTest extends TestCase
     {
         $data = Label::factory()->make()->toArray();
         $response = $this->post(route('labels.store'), $data);
-        $label = Label::latest('id')->first();
         $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('labels', $data);
