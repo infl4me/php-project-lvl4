@@ -15,6 +15,14 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+if (file_exists("/project/phpstan.neon")) {
+    file_put_contents("/project/phpstan.neon", "parameters:
+    paths:
+        - code/app/Models
+    # The level 8 is the highest level
+    level: 1");
+}
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
