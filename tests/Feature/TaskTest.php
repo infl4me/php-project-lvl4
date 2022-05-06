@@ -68,10 +68,18 @@ class TaskTest extends TestCase
     public function testDestroy()
     {
         $task = Task::first();
-
-        $response = $this->delete(route('tasks.destroy', $task));
+        $response = $this->actingAs(User::find($task->creator->id))->delete(route('tasks.destroy', $task));
 
         $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
+    }
+
+    public function testShouldntBeAbleToDelete()
+    {
+        $task = Task::first();
+        // only creator of the task should be able to delete it
+        $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
+
+        $response->assertForbidden();
     }
 }

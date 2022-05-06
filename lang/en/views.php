@@ -55,4 +55,5 @@ return [
     'edit_task' => 'Edit Task',
     'edit_label' => 'Edit Label',
     'delete_label_confirm' => 'Are you sure you want to delete this label?',
+    'apply' => 'Apply',
 ];

@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "fakerphp/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.2",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^9.2",
@@ -18,8 +19,8 @@
         "laravelcollective/html": "^6.3",
         "rollbar/rollbar-laravel": "^7.2",
         "slevomat/coding-standard": "^7.1",
-        "squizlabs/php_codesniffer": "^3.6",
-        "fakerphp/faker": "^1.9.1"
+        "spatie/laravel-query-builder": "^5.0",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "require-dev": {
         "laravel/sail": "^1.0.1",

@@ -8,6 +8,8 @@ use App\Models\TaskStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -18,11 +20,11 @@ class TaskController extends Controller
 
     private function getTaskOptions()
     {
-        $userOptinons = User::all()->pluck('name', 'id')->prepend('-------', null)->toArray();
+        $userOptions = User::all()->pluck('name', 'id')->toArray();
         $statusOptions = TaskStatus::all()->pluck('name', 'id')->toArray();
         $labelOptions = Label::all()->pluck('name', 'id')->toArray();
 
-        return [$userOptinons, $statusOptions, $labelOptions];
+        return [$userOptions, $statusOptions, $labelOptions];
     }
 
     /**
@@ -30,11 +32,19 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->get();
 
-        return view('task.index', compact('tasks'));
+        [$userOptions, $statusOptions] = $this->getTaskOptions();
+        $filter = $request->query('filter');
+        return view('task.index', compact('tasks', 'statusOptions', 'userOptions', 'filter'));
     }
 
     /**
@@ -45,9 +55,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        [$userOptinons, $statusOptions, $labelOptions] = $this->getTaskOptions();
+        [$userOptions, $statusOptions, $labelOptions] = $this->getTaskOptions();
 
-        return view('task.create', compact('task', 'userOptinons', 'statusOptions', 'labelOptions'));
+        return view('task.create', compact('task', 'userOptions', 'statusOptions', 'labelOptions'));
     }
 
     /**
@@ -92,9 +102,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        [$userOptinons, $statusOptions, $labelOptions] = $this->getTaskOptions();
+        [$userOptions, $statusOptions, $labelOptions] = $this->getTaskOptions();
 
-        return view('task.edit', compact('task', 'userOptinons', 'statusOptions', 'labelOptions'));
+        return view('task.edit', compact('task', 'userOptions', 'statusOptions', 'labelOptions'));
     }
 
     /**

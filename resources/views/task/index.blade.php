@@ -4,12 +4,23 @@
     <div class="container-lg">
         <div class="row">
             <div class="col">
-                <h1 class="h1 mb-4">{{ __('views.tasks') }}</h1>
+                <div class="d-flex mb-4">
+                    <h1 class="h1">{{ __('views.tasks') }}</h1>
+                </div>
 
-                @can('create', App\Models\Task::class)
-                    <a href="{{ route('tasks.create') }}" class="btn btn-primary">
-                        {{ __('views.create_task') }}</a>
-                @endcan
+
+                <div class="d-flex mb-3 justify-content-between">
+                    <div class="flex-grow-1">
+                        @include('task.filter')
+                    </div>
+
+                    <div class="ms-3">
+                        @can('create', App\Models\Task::class)
+                            <a href="{{ route('tasks.create') }}" class="btn btn-primary">
+                                {{ __('views.create_task') }}</a>
+                        @endcan
+                    </div>
+                </div>
 
                 <div class="table-responsive mt-2">
                     <table class="table table-bordered table-hover text-nowrap">
