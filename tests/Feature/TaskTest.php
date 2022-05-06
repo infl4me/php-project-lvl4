@@ -35,7 +35,7 @@ class TaskTest extends TestCase
         $data = Task::factory()->make()->toArray();
         $response = $this->post(route('tasks.store'), $data);
         $task = Task::latest('id')->first();
-        $response->assertRedirect(route('tasks.show', $task));
+        $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('tasks', $data);
     }
@@ -60,7 +60,7 @@ class TaskTest extends TestCase
 
         $response = $this->patch(route('tasks.update', $task), $data);
 
-        $response->assertRedirect(route('tasks.edit', $task));
+        $response->assertRedirect(route('tasks.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('tasks', $data);
     }

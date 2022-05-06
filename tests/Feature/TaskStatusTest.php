@@ -19,7 +19,7 @@ class TaskStatusTest extends TestCase
         $data = TaskStatus::factory()->make()->only('name');
         $response = $this->post(route('task_statuses.store'), $data);
         $taskStatus = TaskStatus::latest('id')->first();
-        $response->assertRedirect(route('task_statuses.show', $taskStatus));
+        $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('task_statuses', $data);
     }
@@ -45,7 +45,7 @@ class TaskStatusTest extends TestCase
 
         $response = $this->actingAs($user)->patch(route('task_statuses.update', $taskStatus), ['name' => $data['name']]);
 
-        $response->assertRedirect(route('task_statuses.edit', $taskStatus));
+        $response->assertRedirect(route('task_statuses.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('task_statuses', $data);
     }

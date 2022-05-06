@@ -32,7 +32,7 @@ class LabelTest extends TestCase
         $data = Label::factory()->make()->toArray();
         $response = $this->post(route('labels.store'), $data);
         $label = Label::latest('id')->first();
-        $response->assertRedirect(route('labels.show', $label));
+        $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('labels', $data);
     }
@@ -57,7 +57,7 @@ class LabelTest extends TestCase
 
         $response = $this->patch(route('labels.update', $label), $data);
 
-        $response->assertRedirect(route('labels.edit', $label));
+        $response->assertRedirect(route('labels.index'));
         $response->assertSessionHasNoErrors();
         $this->assertDatabaseHas('labels', $data);
     }
