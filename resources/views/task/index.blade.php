@@ -42,7 +42,7 @@
                                             {{ $task->name }}</a></td>
                                     <td>{{ $task->creator->name }}</td>
                                     <td>{{ optional($task->assignee)->name }}</td>
-                                    <td>{{ $task->created_at }}</td>
+                                    <td>{{ $task->created_at->format('d.m.Y') }}</td>
                                     <td>
                                         @can('delete', $task)
                                             <a class="text-danger text-decoration-none"

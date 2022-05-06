@@ -27,7 +27,7 @@
                                     <td><a class="text-decoration-none" href="{{ route('labels.show', $label) }}">
                                             {{ $label->name }}</a></td>
                                     <td>{{ $label->description }}</td>
-                                    <td>{{ $label->created_at }}</td>
+                                    <td>{{ $label->created_at->format('d.m.Y') }}</td>
                                     <td>
                                         @can('delete', $label)
                                             <a class="text-danger text-decoration-none"
