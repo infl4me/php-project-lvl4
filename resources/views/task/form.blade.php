@@ -1,6 +1,6 @@
 <div class="form-group mb-3">
     {{ Form::label('name', __('views.name')) }}
-    {{ Form::text('name', null, ['class' => 'form-control' . ($errors->get('name') ? ' is-invalid' : ''), 'required' => true]) }}
+    {{ Form::text('name', null, ['class' => 'form-control' . ($errors->get('name') ? ' is-invalid' : '')]) }}
     @error('name')
         <div class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -18,7 +18,7 @@
 </div>
 <div class="form-group mb-3">
     {{ Form::label('status_id', __('views.status')) }}
-    {{ Form::select('status_id', $statusOptions, null, ['placeholder' => '-------', 'class' => 'form-control' . ($errors->get('status_id') ? ' is-invalid' : ''), 'required' => true]) }}
+    {{ Form::select('status_id', $statusOptions, null, ['placeholder' => '-------', 'class' => 'form-control' . ($errors->get('status_id') ? ' is-invalid' : '')]) }}
     @error('status_id')
         <div class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
