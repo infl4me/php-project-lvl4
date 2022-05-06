@@ -6,7 +6,7 @@
     </div>
 @enderror
 {{ Form::label('description', __('views.description')) }}
-{{ Form::textarea('description', null, ['class' => 'form-control' . ($errors->get('description') ? ' is-invalid' : ''), 'required' => true]) }}
+{{ Form::textarea('description', null, ['class' => 'form-control' . ($errors->get('description') ? ' is-invalid' : '')]) }}
 @error('description')
     <div class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>

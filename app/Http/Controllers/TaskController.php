@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -19,8 +20,9 @@ class TaskController extends Controller
     {
         $userOptinons = User::all()->pluck('name', 'id')->prepend('-------', null)->toArray();
         $statusOptions = TaskStatus::all()->pluck('name', 'id')->toArray();
+        $labelOptions = Label::all()->pluck('name', 'id')->toArray();
 
-        return [$userOptinons, $statusOptions];
+        return [$userOptinons, $statusOptions, $labelOptions];
     }
 
     /**
@@ -43,9 +45,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        [$userOptinons, $statusOptions] = $this->getTaskOptions();
+        [$userOptinons, $statusOptions, $labelOptions] = $this->getTaskOptions();
 
-        return view('task.create', compact('task', 'userOptinons', 'statusOptions'));
+        return view('task.create', compact('task', 'userOptinons', 'statusOptions', 'labelOptions'));
     }
 
     /**
@@ -64,6 +66,7 @@ class TaskController extends Controller
         $task = new Task($request->all());
         $task->created_by_id = Auth::id();
         $task->save();
+        $task->labels()->sync($request->labels);
 
         flash(__('alerts.task.created'))->success();
 
@@ -89,9 +92,9 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        [$userOptinons, $statusOptions] = $this->getTaskOptions();
+        [$userOptinons, $statusOptions, $labelOptions] = $this->getTaskOptions();
 
-        return view('task.edit', compact('task', 'userOptinons', 'statusOptions'));
+        return view('task.edit', compact('task', 'userOptinons', 'statusOptions', 'labelOptions'));
     }
 
     /**
@@ -104,6 +107,7 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $task->update($request->all());
+        $task->labels()->sync($request->labels);
 
         flash(__('alerts.task.updated'))->success();
 
@@ -118,6 +122,7 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        $task->labels()->detach();
         $task->delete();
 
         flash(__('alerts.task.deleted'))->success();
