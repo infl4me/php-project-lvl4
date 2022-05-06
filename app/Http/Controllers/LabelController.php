@@ -53,7 +53,7 @@ class LabelController extends Controller
 
         flash(__('alerts.label.created'))->success();
 
-        return redirect()->route('labels.show', $label);
+        return redirect()->route('labels.index');
     }
 
     /**
@@ -91,7 +91,7 @@ class LabelController extends Controller
 
         flash(__('alerts.label.updated'))->success();
 
-        return redirect()->route('labels.edit', $label);
+        return redirect()->route('labels.index');
     }
 
     /**

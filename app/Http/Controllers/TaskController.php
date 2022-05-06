@@ -80,7 +80,7 @@ class TaskController extends Controller
 
         flash(__('alerts.task.created'))->success();
 
-        return redirect()->route('tasks.show', $task);
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -121,7 +121,7 @@ class TaskController extends Controller
 
         flash(__('alerts.task.updated'))->success();
 
-        return redirect()->route('tasks.edit', $task);
+        return redirect()->route('tasks.index');
     }
 
     /**

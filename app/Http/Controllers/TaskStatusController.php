@@ -53,7 +53,7 @@ class TaskStatusController extends Controller
 
         flash(__('alerts.status.created'))->success();
 
-        return redirect()->route('task_statuses.show', $taskStatus);
+        return redirect()->route('task_statuses.index');
     }
 
     /**
@@ -91,7 +91,7 @@ class TaskStatusController extends Controller
 
         flash(__('alerts.status.updated'))->success();
 
-        return redirect()->route('task_statuses.edit', $taskStatus);
+        return redirect()->route('task_statuses.index');
     }
 
     /**
