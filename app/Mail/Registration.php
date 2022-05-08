@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Test extends Mailable
+class Registration extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -16,8 +16,9 @@ class Test extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
+        $this->user = $user;
     }
 
     /**
@@ -27,7 +28,7 @@ class Test extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com', 'Example')
-            ->view('emails.test');
+        return $this->from('example@example.com', 'Admin')
+            ->view('emails.register', ['user' => $this->user]);
     }
 }
