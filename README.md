@@ -1,7 +1,6 @@
 [Demo](https://shrouded-sierra-87295.herokuapp.com/)
 
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/infl4me/php-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/infl4me/php-project-lvl4/actions)
+### CI status:
 [![PHP CI](https://github.com/infl4me/php-project-lvl4/actions/workflows/php-ci.yml/badge.svg)](https://github.com/infl4me/php-project-lvl4/actions/workflows/php-ci.yml)
 
 ### Description
