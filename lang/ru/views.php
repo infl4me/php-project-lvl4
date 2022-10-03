@@ -3,7 +3,7 @@
 return [
     'app_name' => 'Менеджер задач',
     'auth' => [
-        'email' => 'Email',
+        'email' => 'Эмейл',
         'name' => 'Имя',
         'password' => 'Пароль',
         'remember_me' => 'Запомнить меня',
